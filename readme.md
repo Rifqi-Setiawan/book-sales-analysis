@@ -1,37 +1,129 @@
-# Analisis Data Penjualan dan Rating Buku
+# Book Sales and Ratings - Exploratory Data Analysis (EDA)
 
-Proyek ini bertujuan untuk melakukan analisis eksplorasi data (EDA) pada dataset "Books Sales and Ratings" dari Kaggle. Tujuannya adalah untuk mengungkap pola dan wawasan terkait faktor-faktor yang mempengaruhi popularitas dan persepsi kualitas sebuah buku.
+## 📊 Overview
 
-**Link Dataset:** [Books Sales and Ratings](https://www.kaggle.com/datasets/thedevastator/books-sales-and-ratings)
+This project performs an Exploratory Data Analysis (EDA) on a dataset of books, aiming to understand the relationship between book ratings, sales performance, genres, authors, and publishers.
 
-## Kesimpulan & Rekomendasi
+---
 
-### Ringkasan Eksekutif
+## 🎯 Objective
 
-Analisis ini menemukan bahwa **jumlah review (`Book_ratings_count`) adalah prediktor popularitas yang lebih kuat daripada rating rata-rata (`Book_average_rating`) itu sendiri.** Genre buku dan tingkat kesulitan bahasa (`Author_Rating`) juga menunjukkan korelasi yang signifikan terhadap persepsi pembaca. Wawasan ini menyarankan bahwa strategi pemasaran yang berfokus pada perolehan review awal lebih berdampak daripada hanya menargetkan rating yang sempurna.
+To uncover insights from a collection of books regarding:
 
-### Temuan Kunci (Key Insights)
+* What genres sell the most?
+* Does a high rating influence units sold?
+* Which authors and publishers generate the most revenue?
+* How does language impact the reach and popularity of a book?
 
-*   **Popularitas vs Kualitas:** Terdapat hubungan positif yang kuat antara jumlah rating dan rating rata-rata, namun banyak buku "permata tersembunyi" (rating tinggi, jumlah rating rendah) teridentifikasi. Buku dengan lebih dari 100,000 review hampir tidak pernah memiliki rating di bawah 3.7.
-*   **Dominasi Genre Tertentu:** Genre seperti "Fiction" dan "Fantasy" secara konsisten mendominasi daftar buku dengan jumlah review terbanyak. Namun, genre *niche* seperti "Historical Fiction" menunjukkan rata-rata rating tertinggi, mengindikasikan basis penggemar yang solid dan kritis.
-*   **Pengaruh Tingkat Bahasa:** Buku yang ditulis oleh penulis dengan rating "Intermediate" atau "Expert" cenderung memiliki rating rata-rata yang lebih tinggi secara signifikan dibandingkan dengan "Novice", menunjukkan bahwa pembaca menghargai kompleksitas dan kedalaman tulisan.
-*   **Tren Tahun Terbit:** Ada lonjakan eksponensial dalam jumlah buku yang diterbitkan setelah tahun 2000. Buku-buku modern ini mengumpulkan review lebih cepat, tetapi persaingan yang ketat membuat rata-rata rating sedikit menurun dibandingkan buku-buku klasik pra-2000.
+---
 
-### Rekomendasi Strategis
+## 🗂️ Dataset Summary
 
-Berdasarkan temuan di atas, berikut adalah beberapa rekomendasi untuk para pemangku kepentingan di industri perbukuan:
+* **Number of unique books**: *(computed with `df["Book Name"].nunique()`)*
+* **Date range**: Books published after 1900
+* **Key columns**:
 
-*   **Untuk Penerbit & Tim Pemasaran:**
-    *   **Fokus pada Review Awal:** Prioritaskan kampanye *early-reviewer* (misalnya melalui Goodreads atau NetGalley). Mendapatkan 1.000 review pertama lebih krusial untuk momentum jangka panjang daripada menunggu ulasan organik.
-    *   **Investasi pada Genre Niche:** Jangan abaikan genre dengan volume rendah tetapi rating tinggi. Audiens ini sangat setia dan dapat menjadi target pemasaran yang efisien.
+  * `Book Name`
+  * `Book_average_rating`
+  * `Book_ratings_count`
+  * `units sold`
+  * `sale price`
+  * `genre`
+  * `Author`
+  * `Publisher`
+  * `language_code`
 
-*   **Untuk Penulis Baru:**
-    *   **Kolaborasi untuk Kredibilitas:** Jika Anda seorang penulis "Novice", berkolaborasi dengan penulis yang lebih berpengalaman atau mendapatkan editor yang kuat dapat meningkatkan persepsi kualitas karya Anda secara signifikan.
-    *   **Manajemen Ekspektasi:** Memahami bahwa membangun jumlah review membutuhkan waktu adalah kunci. Fokus pada penulisan berkualitas untuk audiens spesifik Anda.
+---
 
-### Limitasi dan Langkah Selanjutnya
+## 🔍 Key Findings
 
-*   **Limitasi:** Dataset ini tidak memiliki informasi harga, sehingga analisis profitabilitas tidak dapat dilakukan. Selain itu, "genre" terkadang bersifat subjektif dan bisa tumpang tindih.
-*   **Langkah Selanjutnya:**
-    1.  Melakukan **analisis sentimen** pada sampel ulasan teks untuk memahami *alasan* di balik rating (misalnya, apa yang membuat pembaca suka/tidak suka dengan plot, karakter, dll).
-    2.  Menggunakan **web scraping** untuk mendapatkan data harga dan menghubungkannya dengan data saat ini untuk membangun model prediksi pendapatan.
+### Genre & Ratings
+
+* Genres vary in popularity and rating distribution.
+* Top genres identified by count and visualized with bar chart.
+* Some genres consistently achieve higher ratings or more ratings per book.
+
+### Sales & Pricing
+
+* No strong correlation between price and units sold.
+* Books priced higher do not necessarily sell more copies.
+
+### Language Analysis
+
+* English dominates as the primary language.
+* Other languages like Spanish and French are underrepresented.
+
+### Author & Publisher Analysis
+
+* High-revenue authors include J.K. Rowling and George R.R. Martin.
+* Author rating vs. units sold shows a weak positive trend.
+* Publisher revenue is concentrated among a few large names.
+
+### Correlation Insights
+
+* Positive correlation between `Book_average_rating` and `Book_ratings_count`.
+* Books with higher average ratings tend to have higher total rating counts.
+
+---
+
+## 📈 Visualizations
+
+The notebook includes several visualizations:
+
+* Bar plots (Genre distribution, Top Authors)
+* Boxplots (Rating per Genre, Author Rating vs. Sales)
+* Scatter plots (Price vs. Sales, Rating vs. Ratings Count)
+* Pie chart (Language Proportion)
+
+---
+
+## 💡 Insights & Recommendations
+
+* Promote books in popular genres like Fantasy and Young Adult.
+* Focus on author brand-building to increase visibility and sales.
+* Price optimization should be done carefully, since pricing alone doesn’t drive volume.
+* Explore publishing strategies in underrepresented languages for niche markets.
+
+---
+
+## ⚠️ Limitations
+
+* Time-based trends could not be analyzed due to lack of date granularity.
+* Some columns require cleaning (e.g. whitespace in column names).
+* No textual reviews available for sentiment analysis.
+
+---
+
+## 🚀 Future Work
+
+* Incorporate publication date/time for trend analysis.
+* Add review texts to enable NLP-based sentiment analysis.
+* Build predictive models for sales based on ratings, genres, and other metadata.
+
+---
+
+## 📁 Repository Structure
+
+```
+📦eda-books-data
+ ┣ 📜EDA_Books_Data.ipynb
+ ┣ 📜README.md
+ ┣ 📁images/
+ ┃ ┗ 📜(visual outputs here)
+ ┗ 📁data/
+    ┗ 📜books_data.csv
+```
+
+---
+
+## 🙌 Author
+
+Created by **Rifqi Setiawan**
+
+Feel free to fork, clone, and modify for your own analysis. Contributions and feedback are welcome!
+
+---
+
+## 📎 License
+
+This project is licensed under the MIT License.
